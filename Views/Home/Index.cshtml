@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div>
+    <h1>ARE YOU LOGGED IN?</h1>
+    <h2 id="authStatus">NO</h2>
+    <input type="button" onclick="authClicked();" value="SignIn" />
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    var authStatus = "YOU ARE NOT LOGGED IN";
+    var authWindow = null;
+
+    // A $( document ).ready() block.
+    $(document).ready(function () {
+        $('#authStatus').text(authStatus);   
+    });
+    
+    function authClicked() {
+        authWindow = window.open("https://portal.dev.hstream.net?redirect_uri=https://localhost:5001/callback", "auth", "location=no,width=600,height=600,scrollbars=yes,top=100,left=700,resizable = no");
+    };
+
+    function callbackDoThings(param1) {
+        $('#authStatus').text(param1);
+        authWindow.close();
+    };
+</script>
